@@ -1,0 +1,8 @@
+name "dpathutils"
+description "Various functions for manipulating filesystem paths&#47;directories.."
+copyright "Copyright © 2017"
+authors "Paul Crane"
+targetType "library"
+configuration "library" {
+	targetType "library"
+}

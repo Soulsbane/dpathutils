@@ -90,12 +90,13 @@ private:
 
 unittest
 {
+	assert(buildNormalizedPathEx("\\home/soulsbane") == "/home/soulsbane");
+
 	auto path = PathRange("/home/zekereth/stuff");
 
-	writeln(buildNormalizedPathEx("\\home/soulsbane"));
-	writeln(path.back);
-	writeln(path.front);
-	writeln(path.asString);
+	assert(path.back == "stuff");
+	assert(path.front == "/");
+	assert(path.asString == "/home/zekereth/stuff");
 
 	foreach(dir; path)
 	{

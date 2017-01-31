@@ -5,6 +5,7 @@ import std.algorithm.searching : all;
 import std.string : replace;
 import std.traits;
 import std.array;
+import std.range;
 
 import std.stdio : writeln;
 
@@ -55,6 +56,11 @@ public:
 		return range_.join("/").buildNormalizedPath;
 	}
 
+	size_t length()
+	{
+		return walkLength(range_);
+	}
+
 private:
 
 	//INFO: Since phobos makes use of voldemort types we have to work to get the actual type that pathSplitter returns.
@@ -97,6 +103,7 @@ unittest
 	assert(path.back == "stuff");
 	assert(path.front == "/");
 	assert(path.asString == "/home/zekereth/stuff");
+	assert(path.length == 4);
 
 	foreach(dir; path)
 	{

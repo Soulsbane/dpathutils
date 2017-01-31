@@ -78,6 +78,12 @@ public:
 		return path_;
 	}
 
+	PathRange asPathRange()
+	{
+		auto range = PathRange(path_);
+		return range;
+	}
+
 private:
 	string path_ = ".";
 }
@@ -91,16 +97,28 @@ unittest
 	writeln(path.front);
 	writeln(path.asString);
 
-	writeln("------------------");
 	foreach(dir; path)
 	{
 		writeln(dir);
 	}
 
+	writeln("------------------");
+
+	auto strPath = Path("/home/zekereth/stuff");
+	//assert(strPath == "/home/zekereth/stuff"); // TODO: opEquals
+
+	writeln("------------------");
+	auto convertedToRange = strPath.asPathRange();
+
+	foreach(dir; convertedToRange)
+	{
+		writeln(dir);
+	}
+
+	writeln("------------------");
 	auto splitter = pathSplitter("/usr/lib/local");
 	auto pathSplit = PathRange(splitter);
 
-	writeln("------------------");
 	foreach(dir; pathSplit)
 	{
 		writeln(dir);

@@ -14,6 +14,7 @@ private auto getPathSplitterReturnType()
 	return pathSplitter(".");
 }
 
+//INFO: Since phobos makes use of voldemort types we have to work to get the actual type that pathSplitter returns.
 private alias PathSplitterType = ReturnType!(getPathSplitterReturnType);
 
 private string buildNormalizedPathEx(const string[] paths...)
@@ -79,11 +80,7 @@ public:
 	}
 
 private:
-
-	//INFO: Since phobos makes use of voldemort types we have to work to get the actual type that pathSplitter returns.
-	//ReturnType!(getPathSplitterReturnType) range_;
 	PathSplitterType range_;
-
 	alias range_ this;
 }
 

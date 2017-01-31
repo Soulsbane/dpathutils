@@ -61,6 +61,23 @@ public:
 		return walkLength(range_);
 	}
 
+	auto opIndex(size_t index)
+	{
+		size_t currentIndex;
+
+		foreach(dir; range_)
+		{
+			if(currentIndex == index)
+			{
+				return dir;
+			}
+
+			++currentIndex;
+		}
+
+		return ".";
+	}
+
 private:
 
 	//INFO: Since phobos makes use of voldemort types we have to work to get the actual type that pathSplitter returns.
@@ -98,12 +115,18 @@ unittest
 {
 	assert(buildNormalizedPathEx("\\home/soulsbane") == "/home/soulsbane");
 
+	PathRange emptyRange;
+	assert(emptyRange.empty);
+
 	auto path = PathRange("/home/zekereth/stuff");
 
 	assert(path.back == "stuff");
 	assert(path.front == "/");
 	assert(path.asString == "/home/zekereth/stuff");
 	assert(path.length == 4);
+	assert(path[0] == "/");
+	assert(path[3] == "stuff");
+	assert(path[4] == ".");
 
 	foreach(dir; path)
 	{

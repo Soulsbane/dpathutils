@@ -8,6 +8,13 @@ import std.array;
 
 import std.stdio : writeln;
 
+private auto getPathSplitterReturnType()
+{
+	return pathSplitter(".");
+}
+
+private alias PathSplitterType = ReturnType!(getPathSplitterReturnType);
+
 private string buildNormalizedPathEx(const string[] paths...)
 {
 	if(all!`a is null`(paths))
@@ -38,19 +45,21 @@ public:
 		range_ = pathSplitter(path.buildNormalizedPath);
 	}
 
+	this(PathSplitterType range)
+	{
+		range_ = range;
+	}
+
 	string asString()
 	{
 		return range_.join("/").buildNormalizedPath;
 	}
 
 private:
-	auto getPathSplitterReturnType()
-	{
-		return pathSplitter(".");
-	}
 
 	//INFO: Since phobos makes use of voldemort types we have to work to get the actual type that pathSplitter returns.
-	ReturnType!(PathRange.getPathSplitterReturnType) range_;
+	//ReturnType!(getPathSplitterReturnType) range_;
+	PathSplitterType range_;
 
 	alias range_ this;
 }
@@ -84,6 +93,15 @@ unittest
 
 	writeln("------------------");
 	foreach(dir; path)
+	{
+		writeln(dir);
+	}
+
+	auto splitter = pathSplitter("/usr/lib/local");
+	auto pathSplit = PathRange(splitter);
+
+	writeln("------------------");
+	foreach(dir; pathSplit)
 	{
 		writeln(dir);
 	}

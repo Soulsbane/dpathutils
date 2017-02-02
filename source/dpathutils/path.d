@@ -93,7 +93,7 @@ public:
 		path_ = buildNormalizedPathEx(path);
 	}
 
-	string asString()
+	string asString() pure @safe
 	{
 		return path_;
 	}
@@ -102,6 +102,16 @@ public:
 	{
 		auto range = PathRange(path_);
 		return range;
+	}
+
+	bool opEquals(const string path) pure @safe
+	{
+		return path == path_;
+	}
+
+	bool opEquals(Path path) pure @safe
+	{
+		return path.asString == path_;
 	}
 
 private:
@@ -133,7 +143,10 @@ unittest
 	writeln("------------------");
 
 	auto strPath = Path("/home/zekereth/stuff");
-	//assert(strPath == "/home/zekereth/stuff"); // TODO: opEquals
+	assert(strPath == "/home/zekereth/stuff");
+
+	auto strPath2 = Path("/home/zekereth/stuff");
+	assert(strPath == strPath2);
 
 	writeln("------------------");
 	auto convertedToRange = strPath.asPathRange();

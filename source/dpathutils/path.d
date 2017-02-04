@@ -17,7 +17,7 @@ private auto getPathSplitterReturnType()
 //INFO: Since phobos makes use of voldemort types we have to work to get the actual type that pathSplitter returns.
 private alias PathSplitterType = ReturnType!(getPathSplitterReturnType);
 
-private string buildNormalizedPathEx(const string[] paths...)
+private string buildNormalizedPathEx(const string[] paths...) pure @safe
 {
 	if(all!`a is null`(paths))
 	{
@@ -88,12 +88,17 @@ struct Path
 {
 public:
 
-	this(const string path)
+	this(const string path) pure @safe
 	{
 		path_ = buildNormalizedPathEx(path);
 	}
 
-	string asString() pure @safe
+	this(string[] pstrs...) pure @safe
+	{
+		path_ = pstrs.buildNormalizedPathEx();
+	}
+
+	string toString() pure nothrow @safe
 	{
 		return path_;
 	}
@@ -104,14 +109,61 @@ public:
 		return range;
 	}
 
-	bool opEquals(const string path) pure @safe
+	string extension() pure nothrow @safe
+	{
+		return path_.extension();
+	}
+
+	string rootName() pure nothrow @safe
+	{
+		return path_.rootName();
+	}
+
+	version(Windows) {
+		string driveName() pure nothrow @safe
+		{
+			return path_.driveName();
+		}
+
+		Path stripDrive() pure @safe
+		{
+			return Path(path_.stripDrive());
+		}
+	}
+
+	Path toAbsolute() pure @safe
+	{
+		return Path(path_.absolutePath());
+	}
+
+	Path toAbsolute(string base) pure @safe
+	{
+		return Path(path_.absolutePath(base));
+	}
+
+	Path toRelative() pure
+	{
+		return Path(path_.relativePath());
+	}
+
+	Path toRelative(string base) pure
+	{
+		return Path(path_.relativePath(base));
+	}
+
+	Path dirName()
+	{
+	   return Path(path_.dirName());
+	}
+
+	bool opEquals(const string path) pure nothrow @safe
 	{
 		return path == path_;
 	}
 
-	bool opEquals(Path path) pure @safe
+	bool opEquals(Path path) pure nothrow @safe
 	{
-		return path.asString == path_;
+		return path.toString == path_;
 	}
 
 private:
@@ -142,8 +194,9 @@ unittest
 
 	writeln("------------------");
 
-	auto strPath = Path("/home/zekereth/stuff");
+	auto strPath = Path("/home/zekereth/stuff/");
 	assert(strPath == "/home/zekereth/stuff");
+	assert(strPath.dirName == "/home/zekereth");
 
 	auto strPath2 = Path("/home/zekereth/stuff");
 	assert(strPath == strPath2);

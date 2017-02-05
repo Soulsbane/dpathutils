@@ -178,6 +178,9 @@ private:
 unittest
 {
 	assert(buildNormalizedPathEx("\\home/soulsbane") == "/home/soulsbane");
+	assert(buildNormalizedPathEx() == "");
+	assert(buildNormalizedPathEx(null) == null);
+	assert(buildNormalizedPathEx(null) == "");
 
 	PathRange emptyRange;
 	assert(emptyRange.empty);
@@ -223,9 +226,5 @@ unittest
 	{
 		writeln(dir);
 	}
-
-	assert(buildNormalizedPathEx() == "");
-	assert(buildNormalizedPathEx(null) == null);
-	assert(buildNormalizedPathEx(null) == "");
 }
 

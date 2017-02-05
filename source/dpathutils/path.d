@@ -171,6 +171,12 @@ public:
 		return path.toString == path_;
 	}
 
+	Path opAssign(const string path)
+	{
+		path_ = path;
+		return this;
+	}
+
 private:
 	string path_ = ".";
 }
@@ -226,5 +232,11 @@ unittest
 	{
 		writeln(dir);
 	}
+
+	Path assignTest = "/home/assign/path";
+	assert(assignTest == "/home/assign/path");
+
+	assignTest = "/home/assign/another/path"; // opAssign
+	assert(assignTest == "/home/assign/another/path");
 }
 

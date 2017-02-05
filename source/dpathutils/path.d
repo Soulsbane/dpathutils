@@ -156,6 +156,11 @@ public:
 	   return Path(path_.dirName());
 	}
 
+	bool empty() pure nothrow @safe
+	{
+		return path_ == string.init;
+	}
+
 	bool opEquals(const string path) pure nothrow @safe
 	{
 		return path == path_;
@@ -197,6 +202,7 @@ unittest
 	auto strPath = Path("/home/zekereth/stuff/");
 	assert(strPath == "/home/zekereth/stuff");
 	assert(strPath.dirName == "/home/zekereth");
+	assert(!strPath.empty);
 
 	auto strPath2 = Path("/home/zekereth/stuff");
 	assert(strPath == strPath2);

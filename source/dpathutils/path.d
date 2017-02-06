@@ -119,7 +119,8 @@ public:
 		return path_.rootName();
 	}
 
-	version(Windows) {
+	version(Windows)
+	{
 		string driveName() pure nothrow @safe
 		{
 			return path_.driveName();

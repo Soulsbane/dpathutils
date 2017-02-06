@@ -195,7 +195,7 @@ unittest
 
 	assert(path.back == "stuff");
 	assert(path.front == "/");
-	assert(path.asString == "/home/zekereth/stuff");
+	assert(path.toString == "/home/zekereth/stuff");
 	assert(path.length == 4);
 	assert(path[0] == "/");
 	assert(path[3] == "stuff");

@@ -54,7 +54,15 @@ public:
 
 	string toString()
 	{
-		return range_.join("/").buildNormalizedPath;
+		version(Windows)
+		{
+			//FIXME: Could be an issue with drive letters.
+			return range_.join("\\").buildNormalizedPath;
+		}
+		else
+		{
+			return range_.join("/").buildNormalizedPath;
+		}
 	}
 
 	size_t length()

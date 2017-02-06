@@ -52,7 +52,7 @@ public:
 		range_ = range;
 	}
 
-	string asString()
+	string toString()
 	{
 		return range_.join("/").buildNormalizedPath;
 	}

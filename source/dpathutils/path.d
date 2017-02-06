@@ -103,7 +103,7 @@ public:
 		return path_;
 	}
 
-	PathRange asPathRange()
+	PathRange toPathRange()
 	{
 		auto range = PathRange(path_);
 		return range;
@@ -217,7 +217,7 @@ unittest
 	assert(strPath == strPath2);
 
 	writeln("------------------");
-	auto convertedToRange = strPath.asPathRange();
+	auto convertedToRange = strPath.toPathRange();
 
 	foreach(dir; convertedToRange)
 	{

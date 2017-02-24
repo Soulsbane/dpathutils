@@ -49,7 +49,7 @@ struct ConfigPath
 		Params:
 			args = Name of the directory to retrieve.
 	*/
-	string getConfigDir(T...)(T args) pure nothrow @safe const
+	string getDir(T...)(T args) pure nothrow @safe const
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
 	}
@@ -57,7 +57,7 @@ struct ConfigPath
 	/**
 		Retrieves the path to the applicationName's config directory.
 	*/
-	string getAppConfigDir() pure nothrow @safe const
+	string getAppDir() pure nothrow @safe const
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_);
 	}
@@ -71,7 +71,7 @@ struct ConfigPath
 		Returns:
 			True if the directory was created false otherwise.
 	*/
-	bool createConfigDir(T...)(T args) @trusted
+	bool createDir(T...)(T args) @trusted
 	{
 		immutable string normalPath = getConfigDir(args);
 
@@ -92,7 +92,7 @@ struct ConfigPath
 		Returns:
 			True if the directory was removed false otherwise;
 	*/
-	bool removeConfigDir(T...)(T args) @trusted
+	bool removeDir(T...)(T args) @trusted
 	{
 		immutable string normalPath = getConfigDir(args);
 
@@ -107,7 +107,7 @@ struct ConfigPath
 	/**
 		Removes all directories under applicationName including applicationName.
 	*/
-	void removeAllConfigDirs()
+	void removeAllDirs()
 	{
 		rmdirRecurse(getAppConfigDir());
 	}

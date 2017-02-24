@@ -6,3 +6,4 @@ targetType "library"
 configuration "library" {
 	targetType "library"
 }
+dependency "standardpaths" version=">=0.0.0"

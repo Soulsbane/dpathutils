@@ -73,7 +73,7 @@ struct ConfigPath
 	*/
 	bool createDir(T...)(T args) @trusted
 	{
-		immutable string normalPath = getConfigDir(args);
+		immutable string normalPath = getDir(args);
 
 		if(!exists(normalPath))
 		{
@@ -94,7 +94,7 @@ struct ConfigPath
 	*/
 	bool removeDir(T...)(T args) @trusted
 	{
-		immutable string normalPath = getConfigDir(args);
+		immutable string normalPath = getDir(args);
 
 		if(exists(normalPath))
 		{
@@ -109,7 +109,7 @@ struct ConfigPath
 	*/
 	void removeAllDirs()
 	{
-		rmdirRecurse(getAppConfigDir());
+		rmdirRecurse(getAppDir());
 	}
 
 private:
@@ -129,11 +129,11 @@ unittest
 
 	auto path = ConfigPath("DlangUnitOrg", "MyUnitTestApp");
 
-	assert(path.createConfigDir("tests"));
-	writeln(path.getConfigDir("tests"));
-	writeln(path.getAppConfigDir);
-	assert(path.removeConfigDir("tests"));
-	path.removeAllConfigDirs();
+	assert(path.createDir("tests"));
+	writeln(path.getDir("tests"));
+	writeln(path.getAppDir);
+	assert(path.removeDir("tests"));
+	path.removeAllDirs();
 
 	writeln();
 }

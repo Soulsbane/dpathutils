@@ -6,6 +6,7 @@ import std.string : replace;
 import std.traits;
 import std.array;
 import std.range;
+import std.typecons;
 
 import std.stdio : writeln;
 
@@ -170,21 +171,7 @@ public:
 		return path_ == string.init;
 	}
 
-	bool opEquals(const string path) pure nothrow @safe
-	{
-		return path == path_;
-	}
-
-	bool opEquals(Path path) pure nothrow @safe
-	{
-		return path.toString == path_;
-	}
-
-	Path opAssign(const string path)
-	{
-		path_ = path;
-		return this;
-	}
+	mixin Proxy!path_;
 
 private:
 	string path_ = ".";

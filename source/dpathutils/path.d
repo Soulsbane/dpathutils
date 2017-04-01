@@ -230,9 +230,19 @@ unittest
 	}
 
 	Path assignTest = "/home/assign/path";
-	assert(assignTest == "/home/assign/path");
 
+	assert(assignTest == "/home/assign/path");
 	assignTest = "/home/assign/another/path"; // opAssign
 	assert(assignTest == "/home/assign/another/path");
+	assert(assignTest.toString == "/home/assign/another/path");
+	assert(assignTest.toRelative == "../../../../../assign/another/path");
+	assert(assignTest.toAbsolute == "/home/assign/another/path");
+	assert(assignTest.rootName == "/");
+
+	Path application = "/home/documents/myfile.txt";
+	assert(application.extension == ".txt");
+
+	PathSplitterType splitType;
+	assert(typeof(splitType).stringof == "PathSplitter");
 }
 

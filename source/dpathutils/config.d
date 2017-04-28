@@ -112,6 +112,15 @@ struct ConfigPath
 		rmdirRecurse(getAppDir());
 	}
 
+	/**
+		Determines whether the path exists in the application's config directory.
+	*/
+	bool exists(T...)(T args)
+	{
+		immutable string path = getDir(args);
+		return path.exists;
+	}
+
 private:
 
 	string organizationName_;
@@ -130,6 +139,7 @@ unittest
 	auto path = ConfigPath("DlangUnitOrg", "MyUnitTestApp");
 
 	assert(path.createDir("tests"));
+	assert(path.exists("tests"));
 	writeln(path.getDir("tests"));
 	writeln(path.getAppDir);
 	assert(path.removeDir("tests"));

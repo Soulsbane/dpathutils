@@ -7,8 +7,12 @@ import std.traits;
 import std.array;
 import std.range;
 import std.typecons;
-
 import std.stdio : writeln;
+
+version(unittest)
+{
+	import fluent.asserts;
+}
 
 private auto getPathSplitterReturnType()
 {

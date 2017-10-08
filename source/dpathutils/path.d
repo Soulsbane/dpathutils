@@ -206,8 +206,6 @@ unittest
 		writeln(dir);
 	}
 
-	writeln("------------------");
-
 	auto strPath = Path("/home/zekereth/stuff/");
 	assert(strPath == "/home/zekereth/stuff");
 	assert(strPath.dirName == "/home/zekereth");
@@ -216,7 +214,6 @@ unittest
 	auto strPath2 = Path("/home/zekereth/stuff");
 	assert(strPath == strPath2);
 
-	writeln("------------------");
 	auto convertedToRange = strPath.toPathRange();
 
 	foreach(dir; convertedToRange)
@@ -224,7 +221,6 @@ unittest
 		writeln(dir);
 	}
 
-	writeln("------------------");
 	auto splitter = pathSplitter("/usr/lib/local");
 	auto pathSplit = PathRange(splitter);
 

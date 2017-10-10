@@ -175,6 +175,36 @@ public:
 		return path_ == string.init;
 	}
 
+	/*bool opEquals(string value) const
+	{
+		return value == path_;
+	}
+
+	bool opEquals()(auto ref const Path value) const
+	{
+		return value.path_ == path_;
+	}
+
+	int opCmp()(auto ref const Path value) const
+	{
+		return std.path.filenameCmp(path_, value.path_);
+	}
+
+	int opCmp(string value) const
+	{
+		return std.path.filenameCmp(path_, value);
+	}
+
+	void opAssign(string value)
+	{
+		path_ = value;
+	}
+
+	void opAssign(Path value)
+	{
+		path_ = value.path_;
+	}*/
+
 	mixin Proxy!path_;
 
 private:
@@ -207,6 +237,7 @@ unittest
 	}
 
 	auto strPath = Path("/home/zekereth/stuff/");
+
 	assert(strPath == "/home/zekereth/stuff");
 	assert(strPath.dirName == "/home/zekereth");
 	assert(!strPath.empty);

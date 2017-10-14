@@ -2,6 +2,7 @@ module dpathutils;
 
 public
 {
-	import dpathutils.path;
 	import dpathutils.config;
+	import dpathutils.exists;
+	import dpathutils.path;
 }

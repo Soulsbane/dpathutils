@@ -8,6 +8,7 @@ import std.array;
 import std.range;
 import std.typecons;
 import std.stdio : writeln;
+import std.file : thisExePath;
 
 version(unittest)
 {
@@ -277,3 +278,38 @@ unittest
 	assert(typeof(splitType).stringof == "PathSplitter");
 }
 
+/**
+	Retrieves the complete path where the application resides.
+*/
+string getAppPath() @safe
+{
+	return dirName(thisExePath());
+}
+
+/**
+	Retrieves the complete path where the application resides with the provided path appended.
+
+	Params:
+		path = The path to append to the application path.
+*/
+string getAppPath(string[] path...) @safe
+{
+	return buildNormalizedPath(dirName(thisExePath()) ~ path);
+}
+
+///
+unittest
+{
+	/*immutable string notFound =  isInPath("fakeprogram");
+	immutable string found =  isInPath("ls");
+
+	assert(found.length);
+	assert(notFound == null);
+	assert(ensurePathExists("my", "test", "dir"));
+	assert(removePathIfExists("my"));
+	assert(ensurePathExists("my/test/dir"));
+	assert(removePathIfExists("my"));
+
+	assert(getAppPath() == dirName(thisExePath()));
+	assert(getAppPath("test") == buildNormalizedPath(dirName(thisExePath()) ~ "/test"));*/
+}

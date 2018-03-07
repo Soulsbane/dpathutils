@@ -10,11 +10,6 @@ import std.typecons;
 import std.stdio : writeln;
 import std.file : thisExePath;
 
-version(unittest)
-{
-	import fluent.asserts;
-}
-
 private auto getPathSplitterReturnType()
 {
 	return pathSplitter(".");
@@ -214,23 +209,23 @@ private:
 
 unittest
 {
-	buildNormalizedPathEx("\\home/soulsbane").should.equal("/home/soulsbane");
-	buildNormalizedPathEx().should.equal("");
-	buildNormalizedPathEx(null).should.equal(null);
-	buildNormalizedPathEx(null).should.equal("");
+	assert(buildNormalizedPathEx("\\home/soulsbane") == "/home/soulsbane");
+	assert(buildNormalizedPathEx() == "");
+	assert(buildNormalizedPathEx(null) == null);
+	assert(buildNormalizedPathEx(null) == "");
 
 	PathRange emptyRange;
 	assert(emptyRange.empty);
 
 	auto path = PathRange("/home/zekereth/stuff");
 
-	path.back.should.equal("stuff");
-	path.front.should.equal("/");
-	path.toString.should.equal("/home/zekereth/stuff");
-	path.length.should.equal(4);
-	path[0].should.equal("/");
-	path[3].should.equal("stuff");
-	path[4].should.equal(".");
+	assert(path.back == "stuff");
+	assert(path.front == "/");
+	assert(path.toString == "/home/zekereth/stuff");
+	assert(path.length == 4);
+	assert(path[0] == "/");
+	assert(path[3] == "stuff");
+	assert(path[4] == ".");
 
 	foreach(dir; path)
 	{

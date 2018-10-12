@@ -8,6 +8,7 @@ module dpathutils.config;
 
 import std.path : buildNormalizedPath;
 import std.file : mkdirRecurse, rmdirRecurse, exists;
+import std.traits;
 
 /**
 	Allows for the creation and deletion of directories in the users configuration directory.
@@ -41,7 +42,7 @@ struct ConfigPath
 		applicationName_ = applicationName;
 
 		configDirPath_ = writablePath(StandardPath.config);
-		createDir(); // Creates the actual config dir. Ex ~/.config/organization/applicationName
+		createDir(""); // Creates the actual config dir. Ex ~/.config/organization/applicationName
 	}
 
 	/**
@@ -51,6 +52,7 @@ struct ConfigPath
 			args = Name of the directory to retrieve.
 	*/
 	string getDir(T...)(T args) pure nothrow const @safe
+		if(isSomeString!T)
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
 	}
@@ -72,7 +74,8 @@ struct ConfigPath
 		Returns:
 			True if the directory was created false otherwise.
 	*/
-	bool createDir(T...)(T args = T.init) @trusted
+	bool createDir(T...)(T args) @trusted
+		if(isSomeString!T)
 	{
 		immutable string normalPath = getDir(args);
 
@@ -94,6 +97,7 @@ struct ConfigPath
 			True if the directory was removed false otherwise;
 	*/
 	bool removeDir(T...)(T args) @trusted
+		if(isSomeString!T)
 	{
 		immutable string normalPath = getDir(args);
 
@@ -117,6 +121,7 @@ struct ConfigPath
 		Determines whether the path exists in the application's config directory.
 	*/
 	bool exists(T...)(T args) nothrow const @safe
+		if(isSomeString!T)
 	{
 		immutable string path = getDir(args);
 		return path.exists;

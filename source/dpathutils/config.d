@@ -41,6 +41,7 @@ struct ConfigPath
 		applicationName_ = applicationName;
 
 		configDirPath_ = writablePath(StandardPath.config);
+		createDir(); // Creates the actual config dir. Ex ~/.config/organization/applicationName
 	}
 
 	/**
@@ -71,7 +72,7 @@ struct ConfigPath
 		Returns:
 			True if the directory was created false otherwise.
 	*/
-	bool createDir(T...)(T args) @trusted
+	bool createDir(T...)(T args = T.init) @trusted
 	{
 		immutable string normalPath = getDir(args);
 

@@ -9,6 +9,7 @@ module dpathutils.config;
 import std.path : buildNormalizedPath;
 import std.file : mkdirRecurse, rmdirRecurse, exists;
 import std.traits;
+public import std.typecons : Yes, No, Flag;
 
 /**
 	Allows for the creation and deletion of directories in the users configuration directory.
@@ -21,10 +22,12 @@ struct ConfigPath
 		Params:
 			organizationName = Name of your organization.
 			applicationName = Name of your application.
+			createDirs = Also create the config directory
 	*/
-	this(const string organizationName, const string applicationName) @safe
+	this(const string organizationName, const string applicationName,
+		const Flag!"createDirs" createDirs = Yes.createDirs) @safe
 	{
-		create(organizationName, applicationName);
+		create(organizationName, applicationName, createDirs);
 	}
 
 	/**
@@ -33,8 +36,10 @@ struct ConfigPath
 		Params:
 			organizationName = Name of your organization.
 			applicationName = Name of your application.
+			createDirs = Also create the config directory
 	*/
-	void create(const string organizationName, const string applicationName) @safe
+	void create(const string organizationName, const string applicationName,
+		const Flag!"createDirs" createDirs = Yes.createDirs) @safe
 	{
 		import standardpaths : StandardPath, writablePath;
 
@@ -42,7 +47,11 @@ struct ConfigPath
 		applicationName_ = applicationName;
 
 		configDirPath_ = writablePath(StandardPath.config);
-		createDir(""); // Creates the actual config dir. Ex ~/.config/organization/applicationName
+
+		if(createDirs)
+		{
+			createDir(""); // Creates the actual config dir. Ex ~/.config/organization/applicationName
+		}
 	}
 
 	/**

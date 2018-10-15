@@ -75,6 +75,14 @@ struct ConfigPath
 	}
 
 	/**
+		Gets the user's config directory path. Ex /home/user/.config
+	*/
+	string getConfigDir()
+	{
+		return configDirPath_;
+	}
+
+	/**
 		Creates a directory in the users config directory.
 
 		Params:

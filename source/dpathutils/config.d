@@ -11,6 +11,8 @@ import std.file : mkdirRecurse, rmdirRecurse, exists;
 import std.traits;
 public import std.typecons : Yes, No, Flag;
 
+import standardpaths;
+
 /**
 	Allows for the creation and deletion of directories in the users configuration directory.
 */
@@ -41,8 +43,6 @@ struct ConfigPath
 	void create(const string organizationName, const string applicationName,
 		const Flag!"createDirs" createDirs = Yes.createDirs) @safe
 	{
-		import standardpaths : StandardPath, writablePath;
-
 		organizationName_ = organizationName;
 		applicationName_ = applicationName;
 
@@ -80,6 +80,14 @@ struct ConfigPath
 	string getConfigDir()
 	{
 		return configDirPath_;
+	}
+
+	/**
+		Gets the user's home directory path. Ex /home/user
+	*/
+	string getHomeDir()
+	{
+		return homeDir();
 	}
 
 	/**

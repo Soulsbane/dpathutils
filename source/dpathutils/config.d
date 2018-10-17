@@ -91,6 +91,22 @@ struct ConfigPath
 	}
 
 	/**
+		Get the users cache directory.
+	*/
+	string getCacheDir()
+	{
+		return writablePath(StandardPath.cache);
+	}
+
+	/**
+		Get the users data directory.
+	*/
+	string getDataDir()
+	{
+		return writablePath(StandardPath.data);
+	}
+
+	/**
 		Creates a directory in the users config directory.
 
 		Params:

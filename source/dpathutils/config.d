@@ -76,6 +76,9 @@ struct ConfigPath
 
 	/**
 		Gets the user's config directory path. Ex /home/user/.config
+
+		Returns:
+			The path to the user's config directory.
 	*/
 	string getConfigDir()
 	{
@@ -84,6 +87,9 @@ struct ConfigPath
 
 	/**
 		Gets the user's home directory path. Ex /home/user
+
+		Returns:
+			The path to the user's home directory.
 	*/
 	string getHomeDir()
 	{
@@ -92,6 +98,9 @@ struct ConfigPath
 
 	/**
 		Get the users cache directory.
+
+		Returns:
+			The path to the user's cache directory.
 	*/
 	string getCacheDir()
 	{
@@ -100,6 +109,9 @@ struct ConfigPath
 
 	/**
 		Get the users data directory.
+
+		Returns:
+			The path to the user's data directory.
 	*/
 	string getDataDir()
 	{

@@ -104,7 +104,7 @@ struct ConfigPath
 	*/
 	string getCacheDir()
 	{
-		return buildNormalizedPat(hwritablePath(StandardPath.cache, organizationName_, applicationName_));
+		return buildNormalizedPath(writablePath(StandardPath.cache), organizationName_, applicationName_);
 	}
 
 	/**

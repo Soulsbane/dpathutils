@@ -119,6 +119,39 @@ struct ConfigPath
 	}
 
 	/**
+		Get the users desktop directory.
+
+		Returns:
+			The path to the user's desktop directory.
+	*/
+	string getDesktopDir()
+	{
+		return writablePath(StandardPath.desktop);
+	}
+
+	/**
+		Get the users documents directory.
+
+		Returns:
+			The path to the user's documents directory.
+	*/
+	string getDocumentsDir()
+	{
+		return writablePath(StandardPath.documents);
+	}
+
+	/**
+		Get the users pictures directory.
+
+		Returns:
+			The path to the user's pictures directory.
+	*/
+	string getPicturesDir()
+	{
+		return writablePath(StandardPath.pictures);
+	}
+
+	/**
 		Creates a directory in the users config directory.
 
 		Params:

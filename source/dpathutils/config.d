@@ -152,6 +152,39 @@ struct ConfigPath
 	}
 
 	/**
+		Get the users music directory.
+
+		Returns:
+			The path to the user's music directory.
+	*/
+	string getMusicDir()
+	{
+		return writablePath(StandardPath.music);
+	}
+
+	/**
+		Get the users videos directory.
+
+		Returns:
+			The path to the user's videos directory.
+	*/
+	string getVideosDir()
+	{
+		return writablePath(StandardPath.videos);
+	}
+
+	/**
+		Get the users downloads directory.
+
+		Returns:
+			The path to the user's downloads directory.
+	*/
+	string getDownloadsDir()
+	{
+		return writablePath(StandardPath.downloads);
+	}
+
+	/**
 		Creates a directory in the users config directory.
 
 		Params:

@@ -184,6 +184,31 @@ struct ConfigPath
 		return writablePath(StandardPath.downloads);
 	}
 
+	version(Windows)
+	{
+		/**
+			Get the users roaming directory. Only available in Windows.
+
+			Returns:
+				The path to the user's roaming directory.
+		*/
+		string getRoamingDir()
+		{
+			return writablePath(StandardPath.roaming);
+		}
+
+		/**
+			Get the users saved games directory. Only available in Windows.
+
+			Returns:
+				The path to the user's saved games directory.
+		*/
+		string getSavedGamesDir()
+		{
+			return writablePath(StandardPath.savedGames);
+		}
+	}
+
 	/**
 		Creates a directory in the users config directory.
 

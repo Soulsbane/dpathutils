@@ -281,10 +281,6 @@ private:
 unittest
 {
 	import std.stdio : writeln;
-
-	writeln;
-	writeln("<=====================Beginning test for configpath module=====================>");
-
 	auto path = ConfigPath("DlangUnitOrg", "MyUnitTestApp");
 
 	assert(path.createDir("tests"));
@@ -293,6 +289,4 @@ unittest
 	writeln(path.getAppDir);
 	assert(path.removeDir("tests"));
 	path.removeAllDirs();
-
-	writeln();
 }

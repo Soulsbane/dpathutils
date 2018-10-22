@@ -61,7 +61,6 @@ struct ConfigPath
 			args = Name of the directory to retrieve.
 	*/
 	string getDir(T...)(T args) pure nothrow const @safe
-		if(isSomeString!T)
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
 	}

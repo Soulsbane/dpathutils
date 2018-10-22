@@ -1,3 +1,6 @@
+/**
+	Basic Path functionality.
+*/
 module dpathutils.path;
 
 import std.path;
@@ -40,6 +43,9 @@ private string buildNormalizedPathEx(const string[] paths...) pure @safe
 	return result == "" ? "." : result;
 }
 
+/**
+	A rangified path object.
+*/
 struct PathRange
 {
 public:
@@ -93,6 +99,9 @@ private:
 	alias range_ this;
 }
 
+/**
+	Average path handling object.
+*/
 struct Path
 {
 public:

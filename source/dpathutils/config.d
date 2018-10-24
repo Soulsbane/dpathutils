@@ -68,7 +68,7 @@ struct ConfigPath
 	/**
 		Retrieves the path to the applicationName's config directory.
 	*/
-	string getAppDir() pure nothrow const @safe
+	string getAppDir() const pure nothrow @safe
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_);
 	}
@@ -79,7 +79,7 @@ struct ConfigPath
 		Returns:
 			The path to the user's config directory.
 	*/
-	string getConfigDir()
+	string getConfigDir() const pure nothrow @safe
 	{
 		return configDirPath_;
 	}
@@ -90,7 +90,7 @@ struct ConfigPath
 		Returns:
 			The path to the user's home directory.
 	*/
-	string getHomeDir()
+	string getHomeDir() const nothrow @safe
 	{
 		return homeDir();
 	}
@@ -101,7 +101,7 @@ struct ConfigPath
 		Returns:
 			The path to the user's cache directory.
 	*/
-	string getCacheDir()
+	string getCacheDir() const nothrow @safe
 	{
 		return buildNormalizedPath(writablePath(StandardPath.cache), organizationName_, applicationName_);
 	}
@@ -112,7 +112,7 @@ struct ConfigPath
 		Returns:
 			The path to the user's data directory.
 	*/
-	string getDataDir()
+	string getDataDir() const nothrow @safe
 	{
 		return buildNormalizedPath(writablePath(StandardPath.data), organizationName_, applicationName_);
 	}

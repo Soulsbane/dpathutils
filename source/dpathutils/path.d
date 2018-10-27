@@ -284,6 +284,9 @@ unittest
 
 /**
 	Retrieves the complete path where the application resides.
+
+	Returns:
+		A string path where the the application resides.
 */
 string getAppPath() @safe
 {
@@ -295,6 +298,9 @@ string getAppPath() @safe
 
 	Params:
 		path = The path to append to the application path.
+
+	Returns:
+		A string path where the the application resides with the provided path appended.
 */
 string getAppPath(string[] path...) @safe
 {

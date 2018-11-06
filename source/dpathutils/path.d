@@ -323,3 +323,27 @@ unittest
 	assert(getAppPath() == dirName(thisExePath()));
 	assert(getAppPath("test") == buildNormalizedPath(dirName(thisExePath()) ~ "/test"));*/
 }
+
+/**
+	List all the files in the given path.
+
+	Params:
+		path = The path to generate a list of files from.
+*/
+string[] listFiles(string path)
+{
+	import std.algorithm : filter, map;
+	import std.array : array;
+	import std.file : dirEntries, SpanMode;
+	import std.path : baseName;
+
+	return dirEntries(path, SpanMode.shallow)
+		.filter!(a => a.isFile)
+		.map!(a => baseName(a.name))
+		.array;
+}
+
+unittest
+{
+	assert(listFiles(".").length > 3);
+}

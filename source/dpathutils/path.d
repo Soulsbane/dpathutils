@@ -12,6 +12,7 @@ import std.range;
 import std.typecons;
 import std.stdio : writeln;
 import std.file : thisExePath;
+import aliasthat;
 
 private auto getPathSplitterReturnType()
 {
@@ -329,15 +330,16 @@ unittest
 
 	Params:
 		path = The path to generate a list of files from.
+		mode = How far to recurse a directory. Shallow by default - Only spans one directory.
 */
-string[] listFiles(string path)
+string[] listFiles(string path, from!"std.file".SpanMode mode = from!"std.file".SpanMode.shallow)
 {
 	import std.algorithm : filter, map;
 	import std.array : array;
 	import std.file : dirEntries, SpanMode;
 	import std.path : baseName;
 
-	return dirEntries(path, SpanMode.shallow)
+	return dirEntries(path, mode)
 		.filter!(a => a.isFile)
 		.map!(a => baseName(a.name))
 		.array;

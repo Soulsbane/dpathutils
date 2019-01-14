@@ -68,9 +68,10 @@ struct ConfigPath
 	/**
 		Retrieves the path to the applicationName's config directory.
 	*/
-	string getAppDir() const pure nothrow @safe
+	//string getAppConfigDir(T...)(T args) const pure nothrow @safe
+	string getAppDir(T...)(T args) const pure nothrow @safe
 	{
-		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_);
+		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
 	}
 
 	/**
@@ -101,9 +102,9 @@ struct ConfigPath
 		Returns:
 			The path to the user's cache directory.
 	*/
-	string getCacheDir() const nothrow @safe
+	string getCacheDir(T...)(T args) const nothrow @safe
 	{
-		return buildNormalizedPath(writablePath(StandardPath.cache), organizationName_, applicationName_);
+		return buildNormalizedPath(writablePath(StandardPath.cache), organizationName_, applicationName_, args);
 	}
 
 	/**
@@ -112,9 +113,9 @@ struct ConfigPath
 		Returns:
 			The path to the user's data directory.
 	*/
-	string getDataDir() const nothrow @safe
+	string getDataDir(T...)(T args) const nothrow @safe
 	{
-		return buildNormalizedPath(writablePath(StandardPath.data), organizationName_, applicationName_);
+		return buildNormalizedPath(writablePath(StandardPath.data), organizationName_, applicationName_, args);
 	}
 
 	/**
@@ -286,6 +287,7 @@ unittest
 	assert(path.exists("tests"));
 	writeln(path.getDir("tests"));
 	writeln(path.getAppDir);
+	writeln(path.getAppDir("blah"));
 	writeln(path.getDataDir);
 	assert(path.removeDir("tests"));
 	path.removeAllDirs();

@@ -286,6 +286,7 @@ unittest
 	assert(path.exists("tests"));
 	writeln(path.getDir("tests"));
 	writeln(path.getAppDir);
+	writeln(path.getDataDir);
 	assert(path.removeDir("tests"));
 	path.removeAllDirs();
 }

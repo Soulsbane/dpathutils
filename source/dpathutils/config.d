@@ -60,7 +60,8 @@ struct ConfigPath
 		Params:
 			args = Name of the directory to retrieve.
 	*/
-	string getDir(T...)(T args) pure nothrow const @safe
+
+	deprecated("Use getAppDir instead.") string getDir(T...)(T args) pure nothrow const @safe
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
 	}
@@ -80,9 +81,9 @@ struct ConfigPath
 		Returns:
 			The path to the user's config directory.
 	*/
-	string getConfigDir() const pure nothrow @safe
+	string getConfigDir(T...)(T args) const pure nothrow @safe
 	{
-		return configDirPath_;
+		return buildNormalizedPath(configDirPath_, args);
 	}
 
 	/**
@@ -221,7 +222,7 @@ struct ConfigPath
 	bool createDir(T...)(T args) @trusted
 		if(isSomeString!T)
 	{
-		immutable string normalPath = getDir(args);
+		immutable string normalPath = getAppDir(args);
 
 		if(!exists(normalPath))
 		{
@@ -243,7 +244,7 @@ struct ConfigPath
 	bool removeDir(T...)(T args) @trusted
 		if(isSomeString!T)
 	{
-		immutable string normalPath = getDir(args);
+		immutable string normalPath = getAppDir(args);
 
 		if(exists(normalPath))
 		{
@@ -267,7 +268,7 @@ struct ConfigPath
 	bool exists(T...)(T args) nothrow const @safe
 		if(isSomeString!T)
 	{
-		immutable string path = getDir(args);
+		immutable string path = getAppDir(args);
 		return path.exists;
 	}
 
@@ -285,10 +286,15 @@ unittest
 
 	assert(path.createDir("tests"));
 	assert(path.exists("tests"));
-	writeln(path.getDir("tests"));
+
+	writeln(path.getAppDir("tests"));
+	writeln(path.getConfigDir("tests"));
 	writeln(path.getAppDir);
 	writeln(path.getAppDir("blah"));
 	writeln(path.getDataDir);
+	writeln(path.getConfigDir);
+	writeln(path.getConfigDir("foo", "bar"));
+
 	assert(path.removeDir("tests"));
 	path.removeAllDirs();
 }

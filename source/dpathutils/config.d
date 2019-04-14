@@ -69,8 +69,12 @@ struct ConfigPath
 	/**
 		Retrieves the path to the applicationName's config directory.
 	*/
-	//string getAppConfigDir(T...)(T args) const pure nothrow @safe
-	string getAppDir(T...)(T args) const pure nothrow @safe
+	string getAppConfigDir(T...)(T args) const pure nothrow @safe
+	{
+		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
+	}
+
+	deprecated("Use getAppConfigDir instead.") string getAppDir(T...)(T args) const pure nothrow @safe
 	{
 		return buildNormalizedPath(configDirPath_, organizationName_, applicationName_, args);
 	}
@@ -81,7 +85,18 @@ struct ConfigPath
 		Returns:
 			The path to the user's config directory.
 	*/
-	string getConfigDir(T...)(T args) const pure nothrow @safe
+	deprecated("Use getBaseConfigDir instead.") string getConfigDir(T...)(T args) const pure nothrow @safe
+	{
+		return buildNormalizedPath(configDirPath_, args);
+	}
+
+	/**
+		Gets the user's config directory path. Ex /home/user/.config
+
+		Returns:
+			The path to the user's config directory.
+	*/
+	string getBaseConfigDir(T...)(T args) const pure nothrow @safe
 	{
 		return buildNormalizedPath(configDirPath_, args);
 	}
@@ -222,7 +237,7 @@ struct ConfigPath
 	bool createDir(T...)(T args) @trusted
 		if(isSomeString!T)
 	{
-		immutable string normalPath = getAppDir(args);
+		immutable string normalPath = getAppConfigDir(args);
 
 		if(!exists(normalPath))
 		{
@@ -259,7 +274,7 @@ struct ConfigPath
 	*/
 	void removeAllDirs() @trusted
 	{
-		rmdirRecurse(getAppDir());
+		rmdirRecurse(getAppConfigDir());
 	}
 
 	/**
@@ -268,7 +283,7 @@ struct ConfigPath
 	bool exists(T...)(T args) nothrow const @safe
 		if(isSomeString!T)
 	{
-		immutable string path = getAppDir(args);
+		immutable string path = getAppConfigDir(args);
 		return path.exists;
 	}
 

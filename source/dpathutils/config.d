@@ -259,7 +259,7 @@ struct ConfigPath
 	bool removeDir(T...)(T args) @trusted
 		if(isSomeString!T)
 	{
-		immutable string normalPath = getAppDir(args);
+		immutable string normalPath = getAppConfigDir(args);
 
 		if(exists(normalPath))
 		{
@@ -302,13 +302,13 @@ unittest
 	assert(path.createDir("tests"));
 	assert(path.exists("tests"));
 
-	writeln(path.getAppDir("tests"));
-	writeln(path.getConfigDir("tests"));
-	writeln(path.getAppDir);
-	writeln(path.getAppDir("blah"));
+	writeln(path.getAppConfigDir("getAppConfigDirTest"));
+	writeln(path.getBaseConfigDir("tests"));
+	writeln(path.getAppConfigDir);
+	writeln(path.getAppConfigDir("blah"));
 	writeln(path.getDataDir);
-	writeln(path.getConfigDir);
-	writeln(path.getConfigDir("foo", "bar"));
+	writeln(path.getAppConfigDir);
+	writeln(path.getBaseConfigDir("foo", "bar"));
 
 	assert(path.removeDir("tests"));
 	path.removeAllDirs();

@@ -226,7 +226,7 @@ struct ConfigPath
 	}
 
 	/**
-		Creates a directory in the users config directory.
+		Creates a directory in applications config directory. Ex ~/.config/organization/applicationName
 
 		Params:
 			args = Name of the directory to create.
@@ -248,7 +248,7 @@ struct ConfigPath
 	}
 
 	/**
-		Removes a directory from the users config directory.
+		Removes a directory from the applications config directory. Ex ~/.config/organization/applicationName
 
 		Params:
 			args = Name of the directory to remove.
@@ -270,7 +270,7 @@ struct ConfigPath
 	}
 
 	/**
-		Removes all directories under applicationName including applicationName.
+		Removes all directories from the applications config directory. Ex ~/.config/organization/applicationName
 	*/
 	void removeAllDirs() @trusted
 	{
@@ -278,7 +278,8 @@ struct ConfigPath
 	}
 
 	/**
-		Determines whether the path exists in the application's config directory.
+		Determines if a directory from the applications config directory exists.
+		Ex ~/.config/organization/applicationName
 	*/
 	bool exists(T...)(T args) nothrow const @safe
 		if(isSomeString!T)

@@ -50,7 +50,7 @@ struct ConfigPath
 
 		if(createDirs)
 		{
-			createDir(""); // Creates the actual config dir. Ex ~/.config/organization/applicationName
+			createDir("config"); // Creates the actual config dir. Ex $HOME/.config/organization/applicationName/config
 		}
 	}
 
@@ -128,6 +128,7 @@ struct ConfigPath
 
 		Returns:
 			The path to the user's data directory.
+			On Linux: $HOME/.local/share/organization/applicationName
 	*/
 	string getDataDir(T...)(T args) const nothrow @safe
 	{
